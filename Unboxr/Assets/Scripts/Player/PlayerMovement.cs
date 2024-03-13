@@ -5,8 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private Transform cam;
+
     private Rigidbody rb;
-    PlayerInputs input;
+    private PlayerInputs input;
 
     private void Awake()
     {
@@ -21,20 +25,29 @@ public class PlayerMovement : MonoBehaviour
         input.Enable();
     }
 
+    private void OnDisable()
+    {
+        input.Disable();
+    }
+
     private void OnMove()
     {
-        Debug.Log("move");
+        Vector3 move = input.Player.Move.ReadValue<Vector3>();
+        Debug.Log(move);
+        rb.AddRelativeForce(move * moveSpeed);
     }
 
     private void OnLook()
     {
         Vector2 delta = input.Player.Look.ReadValue<Vector2>();
-
-
+        float dTime = Time.deltaTime * 25;
+        
+        cam.Rotate(delta.y * -dTime, 0, 0);
+        transform.Rotate(0, delta.x * dTime, 0);
     }
 
     private void OnJump()
     {
-        Debug.Log("im gonna break a mfers leg");
+        rb.AddForce(new(0, jumpForce));
     }
 }
