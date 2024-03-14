@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
+    [SerializeField] private GameObject boxHolder;
+
     private IInteractable interactable;
     private PlayerInputs input;
     private bool holdingBox = false;
