@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,10 +8,15 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float jumpForce;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float sprintSpeed;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float maxSprint;
     [SerializeField] private Transform cam;
 
     private Rigidbody rb;
     private PlayerInputs input;
+    private Vector3 move = new(0, 0, 0);
+    private bool sprinting = false;
 
     private void Awake()
     {
@@ -30,11 +36,24 @@ public class PlayerMovement : MonoBehaviour
         input.Disable();
     }
 
+    private void Update()
+    {
+        float speed = .5f;
+
+        if (sprinting)
+        {
+            if (rb.velocity.magnitude + move.magnitude < maxSprint)
+                speed = sprintSpeed;
+        }
+        else if (rb.velocity.magnitude + move.magnitude < maxSpeed)
+            speed = moveSpeed;
+
+        rb.AddRelativeForce(2 * speed * move);
+    }
+
     private void OnMove()
     {
-        Vector3 move = input.Player.Move.ReadValue<Vector3>();
-        Debug.Log(move);
-        rb.AddRelativeForce(move * moveSpeed);
+        move = input.Player.Move.ReadValue<Vector3>();
     }
 
     private void OnLook()
@@ -49,5 +68,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnJump()
     {
         rb.AddForce(new(0, jumpForce));
+    }
+
+    private void OnSprint()
+    {
+        if (!sprinting)
+            sprinting = true;
+        else
+            sprinting = false;
     }
 }
