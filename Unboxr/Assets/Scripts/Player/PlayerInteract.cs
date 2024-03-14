@@ -4,15 +4,51 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private IInteractable interactable;
+    private PlayerInputs input;
+    private bool holdingBox = false;
+    private GameObject box;
+
+    private void Start()
     {
-        
+        input = new();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Box"))
+            interactable = other.GetComponent<Box>();
+        else if (other.CompareTag("Door"))
+            interactable = other.GetComponent<Door>();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        interactable = null;
+    }
+
+    private void OnPickUp()
+    {
+        Debug.Log("pickup");
+        if (interactable == null)
+            return;
+
+        interactable.Interact();
+
+        if (!holdingBox)
+        {
+            box = interactable.MyObject;
+            holdingBox = true;
+        }
+        else
+        {
+            box = null;
+            holdingBox = false;
+        }
+    }
+
+    private void OnOpenDoor()
+    {
+        interactable.Interact();
     }
 }

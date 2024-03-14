@@ -40,11 +40,8 @@ public class PlayerMovement : MonoBehaviour
     {
         float speed = .5f;
 
-        if (sprinting)
-        {
-            if (rb.velocity.magnitude + move.magnitude < maxSprint)
-                speed = sprintSpeed;
-        }
+        if (sprinting && rb.velocity.magnitude + move.magnitude < maxSprint)
+            speed = sprintSpeed;
         else if (rb.velocity.magnitude + move.magnitude < maxSpeed)
             speed = moveSpeed;
 
