@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
@@ -11,9 +12,21 @@ public class PlayerInteract : MonoBehaviour
     private bool holdingBox = false;
     private GameObject box;
 
-    private void Start()
+    private void Awake()
     {
         input = new();
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+        input.Interact.PickUp.performed += OnPickUp;
+        input.Interact.OpenDoor.performed += OnOpenDoor;
+    }
+
+    private void OnDisable()
+    {
+        input.Disable();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,9 +42,8 @@ public class PlayerInteract : MonoBehaviour
         interactable = null;
     }
 
-    private void OnPickUp()
+    private void OnPickUp(InputAction.CallbackContext context)
     {
-        Debug.Log("pickup");
         if (interactable == null)
             return;
 
@@ -49,8 +61,11 @@ public class PlayerInteract : MonoBehaviour
         }
     }
 
-    private void OnOpenDoor()
+    private void OnOpenDoor(InputAction.CallbackContext context)
     {
+        if (interactable == null)
+            return;
+
         interactable.Interact();
     }
 }

@@ -46,6 +46,11 @@ public class PlayerMovement : MonoBehaviour
             speed = moveSpeed;
 
         rb.AddRelativeForce(2 * speed * move);
+
+        if (GroundCheck())
+            rb.drag = 5;
+        else
+            rb.drag = 0;
     }
 
     private void OnMove()
@@ -64,7 +69,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump()
     {
-        rb.AddForce(new(0, jumpForce));
+        if (GroundCheck())
+        {
+            rb.drag = 0;
+            rb.AddForce(new(0, jumpForce));
+        }
     }
 
     private void OnSprint()
@@ -73,5 +82,14 @@ public class PlayerMovement : MonoBehaviour
             sprinting = true;
         else
             sprinting = false;
+    }
+
+    private bool GroundCheck()
+    {
+        Vector3 pos = transform.position;
+        Vector3 scale = transform.lossyScale;
+        pos.y -= transform.lossyScale.y;
+        scale.y = .2f;
+        return !Physics.BoxCast(pos, scale, Vector3.down, Quaternion.identity);
     }
 }

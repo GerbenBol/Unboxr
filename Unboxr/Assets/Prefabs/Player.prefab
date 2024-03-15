@@ -230,7 +230,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &6998995587791592806
 MonoBehaviour:
@@ -247,8 +247,8 @@ MonoBehaviour:
   jumpForce: 450
   moveSpeed: 5
   sprintSpeed: 7
-  maxSpeed: 20
-  maxSprint: 200
+  maxSpeed: 10
+  maxSprint: 14
   cam: {fileID: 6037699769410478123}
 --- !u!114 &9032737622846809459
 MonoBehaviour:
