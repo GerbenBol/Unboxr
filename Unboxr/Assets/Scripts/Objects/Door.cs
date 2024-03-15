@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable, IDestructable
@@ -8,6 +9,6 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
 
     public void Interact()
     {
-
+        
     }
 }
