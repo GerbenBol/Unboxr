@@ -10,7 +10,7 @@ public class PlayerInteract : MonoBehaviour
     private IInteractable interactable;
     private PlayerInputs input;
     private bool holdingBox = false;
-    private GameObject box;
+    private string interactableName = "";
 
     private void Awake()
     {
@@ -29,41 +29,39 @@ public class PlayerInteract : MonoBehaviour
         input.Disable();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.CompareTag("Box"))
-            interactable = other.GetComponent<Box>();
-        else if (other.CompareTag("Door"))
-            interactable = other.GetComponent<Door>();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        interactable = null;
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, .5f))
+        {
+            if (hit.collider.CompareTag("Box"))
+            {
+                interactableName = "Box";
+                interactable = hit.collider.GetComponent<Box>();
+            }
+            else if (hit.collider.CompareTag("Door"))
+            {
+                interactableName = "Door";
+                interactable = hit.collider.GetComponent<Door>();
+            }
+        }
     }
 
     private void OnPickUp(InputAction.CallbackContext context)
     {
-        if (interactable == null)
+        if (interactable == null || interactableName == "Door")
             return;
 
-        interactable.Interact();
+        interactable.Interact(boxHolder);
 
         if (!holdingBox)
-        {
-            box = interactable.MyObject;
             holdingBox = true;
-        }
         else
-        {
-            box = null;
             holdingBox = false;
-        }
     }
 
     private void OnOpenDoor(InputAction.CallbackContext context)
     {
-        if (interactable == null)
+        if (interactable == null || interactableName == "Box")
             return;
 
         interactable.Interact();

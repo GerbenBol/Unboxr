@@ -7,7 +7,5 @@ using UnityEngine;
 
 interface IInteractable
 {
-    public GameObject MyObject { get; }
-
-    public void Interact();
+    public void Interact(GameObject boxHolder = null);
 }

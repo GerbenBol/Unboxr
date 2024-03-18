@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable, IDestructable
 {
-    public GameObject MyObject { get => gameObject; }
-
     [SerializeField] private Rigidbody rb;
 
-    public void Interact()
+    public void Interact(GameObject boxHolder = null)
     {
         Debug.Log("what");
         rb.freezeRotation = false;
-        rb.transform.Rotate(new(0, -5, 0));
+        rb.AddRelativeForce(new(500, 0, 0));
     }
 }
