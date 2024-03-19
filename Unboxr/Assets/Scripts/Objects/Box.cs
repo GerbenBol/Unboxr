@@ -13,6 +13,15 @@ public class Box : MonoBehaviour, IInteractable, IDestructable
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        if (beingHold && Vector3.Distance(transform.position, transform.parent.position) > .1f)
+        {
+            Vector3 moveDir = (transform.parent.position - transform.position);
+            rb.AddForce(moveDir * 10);
+        }
+    }
+
     public void Interact(GameObject boxHolder = null)
     {
         if (boxHolder != null)
@@ -21,6 +30,11 @@ public class Box : MonoBehaviour, IInteractable, IDestructable
                 Pickup(boxHolder);
             else
                 Drop();
+        }
+        else if (beingHold)
+        {
+            Debug.Log("out of range");
+            Drop();
         }
     }
 

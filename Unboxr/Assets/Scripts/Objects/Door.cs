@@ -9,7 +9,6 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
 
     public void Interact(GameObject boxHolder = null)
     {
-        Debug.Log("what");
         rb.freezeRotation = false;
         rb.AddRelativeForce(new(500, 0, 0));
     }
