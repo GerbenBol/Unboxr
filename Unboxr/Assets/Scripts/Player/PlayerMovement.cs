@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInputs input;
     private Vector3 move = new(0, 0, 0);
     private bool sprinting = false;
+    private float originalDrag;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
         input = new();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        originalDrag = rb.drag;
     }
 
     private void OnEnable()
@@ -38,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        // Add movement
         float speed = .5f;
 
         if (sprinting && rb.velocity.magnitude + move.magnitude < maxSprint)
@@ -47,19 +50,22 @@ public class PlayerMovement : MonoBehaviour
 
         rb.AddRelativeForce(2 * speed * move);
 
+        // Ground check
         if (GroundCheck())
-            rb.drag = 5;
+            rb.drag = originalDrag;
         else
             rb.drag = 0;
     }
 
     private void OnMove()
     {
+        // Store movement inputs
         move = input.Player.Move.ReadValue<Vector3>();
     }
 
     private void OnLook()
     {
+        // Verander camera aan de hand van muis movements
         Vector2 delta = input.Player.Look.ReadValue<Vector2>();
         float dTime = Time.deltaTime * 25;
         
@@ -69,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump()
     {
+        // Jump
         if (GroundCheck())
         {
             rb.drag = 0;
@@ -78,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnSprint()
     {
+        // Store sprint variables
         if (!sprinting)
             sprinting = true;
         else
@@ -86,10 +94,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool GroundCheck()
     {
+        // Check of we op de grond staan
         Vector3 pos = transform.position;
-        Vector3 scale = transform.lossyScale;
-        pos.y -= transform.lossyScale.y;
+        Vector3 scale = transform.localScale;
+        pos.y -= transform.lossyScale.y / 2;
         scale.y = .2f;
-        return !Physics.BoxCast(pos, scale, Vector3.down, Quaternion.identity);
+
+        return Physics.BoxCast(pos, scale, Vector3.down, Quaternion.identity, .5f);
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Box : MonoBehaviour, IInteractable, IDestructable
 {
+    public bool Locked = false;
+
     private Rigidbody rb;
     private bool beingHold = false;
 
@@ -15,6 +17,7 @@ public class Box : MonoBehaviour, IInteractable, IDestructable
 
     private void Update()
     {
+        // Verander positie van doos als we niet op de juiste plek zijn
         if (beingHold && Vector3.Distance(transform.position, transform.parent.position) > .1f)
         {
             Vector3 moveDir = (transform.parent.position - transform.position);
@@ -24,23 +27,19 @@ public class Box : MonoBehaviour, IInteractable, IDestructable
 
     public void Interact(GameObject boxHolder = null)
     {
-        if (boxHolder != null)
+        // Check of we vastgehouden worden & of we vastzitten aan een button
+        if (boxHolder != null && !Locked)
         {
             if (!beingHold)
                 Pickup(boxHolder);
             else
                 Drop();
         }
-        else if (beingHold)
-        {
-            Debug.Log("out of range");
-            Drop();
-        }
     }
 
     private void Pickup(GameObject boxHolder)
     {
-        Debug.Log("pickup");
+        // Oppakken van de doos
         transform.SetParent(boxHolder.transform);
         transform.localPosition = new(0, 0, transform.localScale.z + 1);
         transform.rotation = Quaternion.identity;
@@ -52,7 +51,7 @@ public class Box : MonoBehaviour, IInteractable, IDestructable
 
     private void Drop()
     {
-        Debug.Log("drop");
+        // Laat doos vallen
         transform.parent = null;
         rb.useGravity = true;
         rb.freezeRotation = false;

@@ -162,7 +162,7 @@ Rigidbody:
   m_GameObject: {fileID: 1563064989596060332}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 8
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -211,6 +211,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxHolder: {fileID: 1711274687708228269}
+  objectMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &4442100440631092135
 MonoBehaviour:
   m_ObjectHideFlags: 0

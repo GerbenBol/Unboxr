@@ -8,27 +8,32 @@ public class Button : MonoBehaviour
     
     private Material wantedMaterial;
     private string wantedName;
+    private bool completed = false;
 
     private void Start()
     {
         wantedMaterial = renderer.material;
-        Debug.Log(wantedMaterial.ToString());
         wantedName = wantedMaterial.ToString().Split(' ')[0];
-        Debug.Log(wantedName);
+        LevelManager.AddButton(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Box"))
+        if (other.CompareTag("Box") && !completed)
         {
-            Debug.Log(other.GetComponent<MeshRenderer>().material.ToString().Split(' ')[0]);
-
+            // Check of het de juiste doos is
             if (other.GetComponent<MeshRenderer>().material.ToString().Split(' ')[0] == wantedName)
-                Debug.Log("Correct");
+            {
+                // Disable doos & button, geef info door aan level manager
+                completed = true;
+                other.GetComponent<Box>().Locked = true;
+                LevelManager.CompleteButton(gameObject);
+            }
             else
             {
+                // Destroy doos
+                PlayerInteract.holdingBox = false;
                 Destroy(other.gameObject);
-                Debug.Log("wrong");
             }
         }
     }
