@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable, IDestructable
@@ -11,6 +8,7 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
 
     private void Start()
     {
+        // Voeg deur toe aan level manager
         LevelManager.AddDoor(gameObject);
     }
 
@@ -26,7 +24,7 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
 
     public void TurnOnLight()
     {
-        Debug.Log("turn on light");
+        // Doe licht aan voor extra clarity
         light.GetComponent<MeshRenderer>().material = material;
     }
 }
