@@ -7,10 +7,16 @@ public static class LevelManager
     public static bool LevelCompleted = false;
 
     private static Dictionary<GameObject, bool> buttons = new();
+    private static Door door;
 
     public static void AddButton(GameObject gO)
     {
         buttons.Add(gO, false);
+    }
+
+    public static void AddDoor(GameObject gO)
+    {
+        door = gO.GetComponent<Door>();
     }
 
     public static void CompleteButton(GameObject gO)
@@ -20,7 +26,8 @@ public static class LevelManager
         foreach (KeyValuePair<GameObject, bool> kvp in buttons)
             if (!kvp.Value)
                 return;
-        Debug.Log(true);
+
+        door.TurnOnLight();
         LevelCompleted = true;
     }
 }
