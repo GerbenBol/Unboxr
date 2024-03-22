@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Box : MonoBehaviour, IInteractable, IDestructable
 {
+    [SerializeField] private BoxSpawning spawner;
+
     public bool Locked = false;
 
     private Rigidbody rb;
+    private MeshRenderer myMesh;
     private bool beingHold = false;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        myMesh = GetComponent<MeshRenderer>();
     }
 
     private void Update()
@@ -23,6 +24,11 @@ public class Box : MonoBehaviour, IInteractable, IDestructable
             Vector3 moveDir = (transform.parent.position - transform.position);
             rb.AddForce(moveDir * 10);
         }
+    }
+
+    public void Respawn()
+    {
+        LevelManager.CurrentSpawner.SpawnNewBox(myMesh.material);
     }
 
     public void Interact(GameObject boxHolder = null)

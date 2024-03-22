@@ -33,6 +33,7 @@ public class Button : MonoBehaviour
             {
                 // Destroy doos
                 PlayerInteract.holdingBox = false;
+                other.GetComponent<Box>().Respawn();
                 Destroy(other.gameObject);
             }
         }

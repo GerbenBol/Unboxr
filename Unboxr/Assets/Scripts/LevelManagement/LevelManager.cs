@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class LevelManager
 {
     public static bool LevelCompleted = false;
+    public static BoxSpawning CurrentSpawner;
 
-    private static Dictionary<GameObject, bool> buttons = new();
+    private static readonly Dictionary<GameObject, bool> buttons = new();
     private static Door door;
 
     public static void AddButton(GameObject gO)
