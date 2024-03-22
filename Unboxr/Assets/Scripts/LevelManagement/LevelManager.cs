@@ -6,6 +6,7 @@ public static class LevelManager
 {
     public static bool LevelCompleted = false;
     public static BoxSpawning CurrentSpawner;
+    public static float timer = .0f;
 
     private static readonly Dictionary<GameObject, bool> buttons = new();
     private static Door door;

@@ -6,10 +6,13 @@ public class BoxSpawning : MonoBehaviour
 {
     [SerializeField] private int boxesLeft;
     [SerializeField] private GameObject boxPrefab;
+    private IngameUI ui;
 
     private void Start()
     {
         LevelManager.CurrentSpawner = this;
+        ui = GameObject.Find("UI").GetComponent<IngameUI>();
+        ui.ChangeBoxesText(boxesLeft);
     }
 
     public void SpawnNewBox(Material mat)
@@ -19,6 +22,7 @@ public class BoxSpawning : MonoBehaviour
             GameObject gO = Instantiate(boxPrefab);
             gO.GetComponent<MeshRenderer>().material = mat;
             boxesLeft--;
+            ui.ChangeBoxesText(boxesLeft);
         }
     }
 }
