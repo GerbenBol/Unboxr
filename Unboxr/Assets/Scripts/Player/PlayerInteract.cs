@@ -10,6 +10,7 @@ public class PlayerInteract : MonoBehaviour
 
     [SerializeField] private GameObject boxHolder;
     [SerializeField] private LayerMask objectMask;
+    [SerializeField] private PauseScreen pause;
 
     private IInteractable interactable;
     private PlayerInputs input;
@@ -26,6 +27,7 @@ public class PlayerInteract : MonoBehaviour
         input.Enable();
         input.Interact.PickUp.performed += OnPickUp;
         input.Interact.OpenDoor.performed += OnOpenDoor;
+        input.Interact.Pause.performed += OnPause;
     }
 
     private void OnDisable()
@@ -36,50 +38,64 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
-        // Check of we naar een object kijken
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, .5f, objectMask, QueryTriggerInteraction.Collide))
+        if (!PauseScreen.GamePaused)
         {
-            // Check welk object we hebben geraakt
-            if (hit.collider.CompareTag("Box"))
+            // Check of we naar een object kijken
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, .5f, objectMask, QueryTriggerInteraction.Collide))
             {
-                interactableName = "Box";
-                interactable = hit.collider.GetComponent<Box>();
+                // Check welk object we hebben geraakt
+                if (hit.collider.CompareTag("Box"))
+                {
+                    interactableName = "Box";
+                    interactable = hit.collider.GetComponent<Box>();
+                }
+                else if (hit.collider.CompareTag("Door"))
+                {
+                    interactableName = "Door";
+                    interactable = hit.collider.GetComponent<Door>();
+                }
             }
-            else if (hit.collider.CompareTag("Door"))
+            else
             {
-                interactableName = "Door";
-                interactable = hit.collider.GetComponent<Door>();
+                // Zet variables terug zodat interacts niks meer doen
+                interactableName = "";
+                interactable = null;
             }
-        }
-        else
-        {
-            // Zet variables terug zodat interacts niks meer doen
-            interactableName = "";
-            interactable = null;
         }
     }
 
     private void OnPickUp(InputAction.CallbackContext context)
     {
-        // Check of het object een doos is en of we geen doos vasthebben
-        if (!holdingBox)
-            if (interactable == null || interactableName == "Door")
-                return;
+        if (!PauseScreen.GamePaused)
+        {
+            // Check of het object een doos is en of we geen doos vasthebben
+            if (!holdingBox)
+                if (interactable == null || interactableName == "Door")
+                    return;
 
-        interactable.Interact(boxHolder);
+            interactable.Interact(boxHolder);
 
-        if (!holdingBox)
-            holdingBox = true;
-        else
-            holdingBox = false;
+            if (!holdingBox)
+                holdingBox = true;
+            else
+                holdingBox = false;
+        }
     }
 
     private void OnOpenDoor(InputAction.CallbackContext context)
     {
-        // Check of het object een deur is en of we een doos vasthebben
-        if (interactable == null || interactableName == "Box" || holdingBox)
-            return;
+        if (!PauseScreen.GamePaused)
+        {
+            // Check of het object een deur is en of we een doos vasthebben
+            if (interactable == null || interactableName == "Box" || holdingBox)
+                return;
 
-        interactable.Interact();
+            interactable.Interact();
+        }
+    }
+
+    private void OnPause(InputAction.CallbackContext context)
+    {
+        pause.PauseGame(!PauseScreen.GamePaused);
     }
 }

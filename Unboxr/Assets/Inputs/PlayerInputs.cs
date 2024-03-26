@@ -176,6 +176,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""5af3972c-74ee-4ea3-840b-4a2435747571"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -200,6 +209,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""OpenDoor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""246b96da-c318-4bd8-8081-890a2077d43b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -216,6 +236,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Interact = asset.FindActionMap("Interact", throwIfNotFound: true);
         m_Interact_PickUp = m_Interact.FindAction("PickUp", throwIfNotFound: true);
         m_Interact_OpenDoor = m_Interact.FindAction("OpenDoor", throwIfNotFound: true);
+        m_Interact_Pause = m_Interact.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -349,12 +370,14 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private List<IInteractActions> m_InteractActionsCallbackInterfaces = new List<IInteractActions>();
     private readonly InputAction m_Interact_PickUp;
     private readonly InputAction m_Interact_OpenDoor;
+    private readonly InputAction m_Interact_Pause;
     public struct InteractActions
     {
         private @PlayerInputs m_Wrapper;
         public InteractActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @PickUp => m_Wrapper.m_Interact_PickUp;
         public InputAction @OpenDoor => m_Wrapper.m_Interact_OpenDoor;
+        public InputAction @Pause => m_Wrapper.m_Interact_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Interact; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -370,6 +393,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @OpenDoor.started += instance.OnOpenDoor;
             @OpenDoor.performed += instance.OnOpenDoor;
             @OpenDoor.canceled += instance.OnOpenDoor;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IInteractActions instance)
@@ -380,6 +406,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @OpenDoor.started -= instance.OnOpenDoor;
             @OpenDoor.performed -= instance.OnOpenDoor;
             @OpenDoor.canceled -= instance.OnOpenDoor;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IInteractActions instance)
@@ -408,5 +437,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     {
         void OnPickUp(InputAction.CallbackContext context);
         void OnOpenDoor(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

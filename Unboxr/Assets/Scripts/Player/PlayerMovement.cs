@@ -40,21 +40,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // Add movement
-        float speed = .5f;
+        if (!PauseScreen.GamePaused)
+        {
+            // Add movement
+            float speed = .5f;
 
-        if (sprinting && rb.velocity.magnitude + move.magnitude < maxSprint)
-            speed = sprintSpeed;
-        else if (rb.velocity.magnitude + move.magnitude < maxSpeed)
-            speed = moveSpeed;
+            if (sprinting && rb.velocity.magnitude + move.magnitude < maxSprint)
+                speed = sprintSpeed;
+            else if (rb.velocity.magnitude + move.magnitude < maxSpeed)
+                speed = moveSpeed;
 
-        rb.AddRelativeForce(2 * speed * move);
+            rb.AddRelativeForce(2 * speed * move);
 
-        // Ground check
-        if (GroundCheck())
-            rb.drag = originalDrag;
-        else
-            rb.drag = 0;
+            // Ground check
+            if (GroundCheck())
+                rb.drag = originalDrag;
+            else
+                rb.drag = 0;
+        }
     }
 
     private void OnMove()
@@ -65,21 +68,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnLook()
     {
-        // Verander camera aan de hand van muis movements
-        Vector2 delta = input.Player.Look.ReadValue<Vector2>();
-        float dTime = Time.deltaTime * 25;
-        
-        cam.Rotate(Mathf.Clamp(delta.y * -dTime, -85, 85), 0, 0);
-        transform.Rotate(0, delta.x * dTime, 0);
+        if (!PauseScreen.GamePaused)
+        {
+            // Verander camera aan de hand van muis movements
+            Vector2 delta = input.Player.Look.ReadValue<Vector2>();
+            float dTime = Time.deltaTime * 25; 
+       
+            cam.Rotate(Mathf.Clamp(delta.y * -dTime, -85, 85), 0, 0);
+            transform.Rotate(0, delta.x * dTime, 0);
+        }
     }
 
     private void OnJump()
     {
-        // Jump
-        if (GroundCheck())
+        if (!PauseScreen.GamePaused)
         {
-            rb.drag = 0;
-            rb.AddForce(new(0, jumpForce));
+            // Jump
+            if (GroundCheck())
+            {
+                rb.drag = 0;
+                rb.AddForce(new(0, jumpForce));
+            }
         }
     }
 
