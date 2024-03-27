@@ -639,7 +639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5932088857981603636}
-  - component: {fileID: 8881150165194662482}
+  - component: {fileID: 6987187270786495927}
   - component: {fileID: 1429393706800002337}
   m_Layer: 6
   m_Name: Door
@@ -666,7 +666,7 @@ Transform:
   - {fileID: 1692331740485493173}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8881150165194662482
+--- !u!65 &6987187270786495927
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -685,8 +685,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.3568196, y: 3.1166801, z: 2.9297261}
-  m_Center: {x: -1.0423949, y: 1.0583403, z: 0.46486306}
+  m_Size: {x: 0.10569286, y: 3.0825086, z: 2.3720493}
+  m_Center: {x: -0.0046892166, y: 0.92779756, z: 0.47481155}
 --- !u!114 &1429393706800002337
 MonoBehaviour:
   m_ObjectHideFlags: 0
