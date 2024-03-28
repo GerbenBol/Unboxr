@@ -30,8 +30,9 @@ public class PauseScreen : MonoBehaviour
 
     public void Retry()
     {
-        // Restart het level, is nog aan verandering toe want restarting de scene restart vanaf het begin
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // Restart het level
+        Continue();
+        LevelManager.RestartLevel();
     }
 
     public void ReturnToMain()

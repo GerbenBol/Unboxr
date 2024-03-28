@@ -781,6 +781,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5492998934500634733}
+  - component: {fileID: 5991302790900844222}
   m_Layer: 0
   m_Name: Level1
   m_TagString: Untagged
@@ -808,8 +809,25 @@ Transform:
   - {fileID: 1672240395557179995}
   - {fileID: 2425598936212914515}
   - {fileID: 4911732554546981854}
+  - {fileID: 2128635472970151387}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5991302790900844222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079949295463232777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dddf16b3d78c824b8cbf0b20396e3c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Completed: 0
+  LevelIndex: 0
+  BoxSpawner: {fileID: 2091695020037563080}
+  playerSpawnPoint: {fileID: 6832778508184305666}
 --- !u!1 &6105056589578167228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1135,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &6832778508184305666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2128635472970151387}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2128635472970151387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832778508184305666}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.571, y: -2.661, z: -0.096}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5492998934500634733}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8623253213714719215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,6 +1716,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5492998934500634733}
     m_Modifications:
+    - target: {fileID: 3530381416513455979, guid: 079f22145eab3134c8a973e3d58384d2, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.54362476
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530381416513455979, guid: 079f22145eab3134c8a973e3d58384d2, type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.0044642817
+      objectReference: {fileID: 0}
     - target: {fileID: 4654457452447935563, guid: 079f22145eab3134c8a973e3d58384d2, type: 3}
       propertyPath: m_Name
       value: Door

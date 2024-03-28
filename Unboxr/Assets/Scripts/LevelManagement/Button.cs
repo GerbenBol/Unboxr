@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
+    [SerializeField] private int level;
+
     private Material wantedMaterial;
     private string wantedName;
     private bool completed = false;
@@ -12,7 +14,7 @@ public class Button : MonoBehaviour
     {
         wantedMaterial = GetComponent<MeshRenderer>().material;
         wantedName = wantedMaterial.ToString().Split(' ')[0];
-        LevelManager.AddButton(gameObject);
+        LevelManager.Levels[level].AddButton(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -25,7 +27,7 @@ public class Button : MonoBehaviour
                 // Disable doos & button, geef info door aan level manager
                 completed = true;
                 collision.gameObject.GetComponent<Box>().Locked = true;
-                LevelManager.CompleteButton(gameObject);
+                LevelManager.Levels[level].CompleteButton(gameObject);
             }
             else
             {

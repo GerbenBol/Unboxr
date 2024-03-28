@@ -3,17 +3,21 @@ using UnityEngine;
 public class Box : MonoBehaviour, IInteractable, IDestructable
 {
     [SerializeField] private BoxSpawning spawner;
+    [SerializeField] private int level;
 
     public bool Locked = false;
 
     private Rigidbody rb;
     private MeshRenderer myMesh;
     private bool beingHold = false;
+    private Vector3 startPosition;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         myMesh = GetComponent<MeshRenderer>();
+        startPosition = transform.position;
+        LevelManager.Levels[level].AddBox(this);
     }
 
     private void Update()
@@ -41,6 +45,11 @@ public class Box : MonoBehaviour, IInteractable, IDestructable
             else
                 Drop();
         }
+    }
+
+    public void Restart()
+    {
+        transform.position = startPosition;
     }
 
     private void Pickup(GameObject boxHolder)
