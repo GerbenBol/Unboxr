@@ -40,8 +40,10 @@ public class PlayerInteract : MonoBehaviour
     {
         if (!PauseScreen.GamePaused)
         {
-            // Check of we naar een object kijken
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 3f, objectMask, QueryTriggerInteraction.Collide))
+            // Check of we naar een object kijken of al een doos vast hebben
+            if (holdingBox)
+                return;
+            else if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 3f, objectMask, QueryTriggerInteraction.Collide))
             {
                 // Check welk object we hebben geraakt
                 if (hit.collider.CompareTag("Box"))

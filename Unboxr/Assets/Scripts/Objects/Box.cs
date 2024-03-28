@@ -26,7 +26,7 @@ public class Box : MonoBehaviour, IInteractable, IDestructable
         if (beingHold && Vector3.Distance(transform.position, transform.parent.position) > .1f)
         {
             Vector3 moveDir = (transform.parent.position - transform.position);
-            rb.AddForce(moveDir * 10);
+            rb.AddForce(moveDir * 100);
         }
     }
 
