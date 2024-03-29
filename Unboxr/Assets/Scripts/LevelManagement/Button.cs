@@ -5,6 +5,7 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
     [SerializeField] private int level;
+    [SerializeField] private GameObject[] lights;
 
     private Material wantedMaterial;
     private string wantedName;
@@ -15,6 +16,9 @@ public class Button : MonoBehaviour
         wantedMaterial = GetComponent<MeshRenderer>().material;
         wantedName = wantedMaterial.ToString().Split(' ')[0];
         LevelManager.Levels[level].AddButton(gameObject);
+
+        foreach (GameObject light in lights)
+            light.GetComponent<Light>().color = wantedMaterial.color;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -37,5 +41,13 @@ public class Button : MonoBehaviour
                 Destroy(collision.gameObject);
             }
         }
+    }
+
+    public void LightSwitch(bool onOff, string mat)
+    {
+        // Check if we have to switch lights on/off
+        if (mat == wantedName)
+            foreach (GameObject light in lights)
+                light.SetActive(onOff);
     }
 }

@@ -47,6 +47,13 @@ public class Level : MonoBehaviour
         boxes.Add(box);
     }
 
+    public void SearchLights(bool onOff, string mat)
+    {
+        // Sent each button message
+        foreach (KeyValuePair<GameObject, bool> kvp in buttons)
+            kvp.Key.GetComponent<Button>().LightSwitch(onOff, mat);
+    }
+
     public void CompleteButton(GameObject gO)
     {
         // Zet bijbehorende waarde naar true

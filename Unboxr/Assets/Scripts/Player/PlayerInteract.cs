@@ -77,10 +77,7 @@ public class PlayerInteract : MonoBehaviour
 
             interactable.Interact(boxHolder);
 
-            if (!holdingBox)
-                holdingBox = true;
-            else
-                holdingBox = false;
+            holdingBox = !holdingBox;
         }
     }
 
