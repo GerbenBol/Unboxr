@@ -22,10 +22,7 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
     {
         // Disable lock
         if (LevelManager.Levels[level].Completed)
-        {
-            rb.freezeRotation = false;
-            rb.AddRelativeForce(new(500, 0, 0));
-        }
+            rb.AddRelativeForce(new(0, 0, 20000));
         else
             uiController.UpdateLockedEnabled();
     }

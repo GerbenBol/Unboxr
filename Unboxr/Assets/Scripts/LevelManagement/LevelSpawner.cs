@@ -18,7 +18,6 @@ public class LevelSpawner : MonoBehaviour
     public void CompleteLevel(int index)
     {
         int nextLevel = index + 1;
-        Debug.Log("level completed. next level: " + nextLevel + "/" + levels.Count);
 
         // Level completed handling
         if (nextLevel < levels.Count)
