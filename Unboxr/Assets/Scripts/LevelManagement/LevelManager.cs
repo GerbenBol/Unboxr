@@ -16,6 +16,11 @@ public static class LevelManager
         Levels.Add(lvl);
     }
 
+    public static void NextLevel()
+    {
+        currentLevel++;
+    }
+
     public static void RestartLevel()
     {
         timer = .0f;

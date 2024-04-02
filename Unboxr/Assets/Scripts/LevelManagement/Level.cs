@@ -30,6 +30,10 @@ public class Level : MonoBehaviour
         player = GameObject.Find("Player");
     }
 
+    private void Update()
+    {
+    }
+
     public void AddButton(GameObject gO)
     {
         // Voeg button toe aan dictionary
@@ -44,6 +48,7 @@ public class Level : MonoBehaviour
 
     public void AddBox(Box box)
     {
+        // Voeg doos toe aan level
         boxes.Add(box);
     }
 
@@ -68,6 +73,7 @@ public class Level : MonoBehaviour
         door.TurnOnLight();
         Completed = true;
 
+        Debug.Log("complet, " + LevelIndex + ", last spawned: " + LevelSpawner.LastSpawned);
         if (LevelSpawner.LastSpawned != LevelIndex + 1)
             spawner.CompleteLevel(LevelIndex);
     }

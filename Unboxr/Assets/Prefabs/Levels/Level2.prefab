@@ -2324,6 +2324,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6214714781823152620}
     m_Modifications:
+    - target: {fileID: 828394591671052003, guid: 77a09e5197b65594b818dc6930e166c8, type: 3}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3359761815042397018, guid: 77a09e5197b65594b818dc6930e166c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.78
@@ -2390,6 +2394,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6214714781823152620}
     m_Modifications:
+    - target: {fileID: 1429393706800002337, guid: 079f22145eab3134c8a973e3d58384d2, type: 3}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3530381416513455979, guid: 079f22145eab3134c8a973e3d58384d2, type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: 0.54362476
@@ -2460,6 +2468,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6214714781823152620}
     m_Modifications:
+    - target: {fileID: 828394591671052003, guid: 77a09e5197b65594b818dc6930e166c8, type: 3}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3359761815042397018, guid: 77a09e5197b65594b818dc6930e166c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.9
@@ -2571,6 +2583,10 @@ PrefabInstance:
       value: Box (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6236565768246423195, guid: 8bb7d81bd0926ef4897fbeac682d01c3, type: 3}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6236565768246423195, guid: 8bb7d81bd0926ef4897fbeac682d01c3, type: 3}
       propertyPath: spawner
       value: 
       objectReference: {fileID: 770273789857704118}
@@ -2635,6 +2651,10 @@ PrefabInstance:
     - target: {fileID: 5812780560070480007, guid: 8bb7d81bd0926ef4897fbeac682d01c3, type: 3}
       propertyPath: m_Name
       value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 6236565768246423195, guid: 8bb7d81bd0926ef4897fbeac682d01c3, type: 3}
+      propertyPath: level
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6236565768246423195, guid: 8bb7d81bd0926ef4897fbeac682d01c3, type: 3}
       propertyPath: spawner
