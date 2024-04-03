@@ -215,6 +215,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   pause: {fileID: 0}
+  cam: {fileID: 6037699769410478123}
 --- !u!114 &4442100440631092135
 MonoBehaviour:
   m_ObjectHideFlags: 0

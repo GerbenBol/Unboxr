@@ -11,6 +11,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private GameObject boxHolder;
     [SerializeField] private LayerMask objectMask;
     [SerializeField] private PauseScreen pause;
+    [SerializeField] private Transform cam;
 
     private IInteractable interactable;
     private PlayerInputs input;
@@ -43,7 +44,7 @@ public class PlayerInteract : MonoBehaviour
             // Check of we naar een object kijken of al een doos vast hebben
             if (holdingBox)
                 return;
-            else if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 3f, objectMask, QueryTriggerInteraction.Collide))
+            else if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit, 3f, objectMask, QueryTriggerInteraction.Collide))
             {
                 // Check welk object we hebben geraakt
                 if (hit.collider.CompareTag("Box"))
@@ -76,7 +77,6 @@ public class PlayerInteract : MonoBehaviour
                     return;
 
             interactable.Interact(boxHolder);
-
             holdingBox = !holdingBox;
         }
     }
