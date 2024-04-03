@@ -12,10 +12,14 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private LayerMask objectMask;
     [SerializeField] private PauseScreen pause;
     [SerializeField] private Transform cam;
+    [SerializeField] private IngameUI ui;
 
     private IInteractable interactable;
     private PlayerInputs input;
     private string interactableName = "";
+    private bool firstPickup = true;
+    private bool firstDrop = true;
+    private bool firstOpen = true;
 
     private void Awake()
     {
@@ -51,11 +55,19 @@ public class PlayerInteract : MonoBehaviour
                 {
                     interactableName = "Box";
                     interactable = hit.collider.GetComponent<Box>();
+
+                    // Show on screen to help with the first time
+                    if (firstPickup)
+                        ui.InteractHelper(IngameUI.InteractHelperState.BoxPickup);
                 }
                 else if (hit.collider.CompareTag("Door"))
                 {
                     interactableName = "Door";
                     interactable = hit.collider.GetComponent<Door>();
+
+                    // Show on screen to help with the first time
+                    if (firstOpen)
+                        ui.InteractHelper(IngameUI.InteractHelperState.DoorOpen);
                 }
             }
             else
@@ -63,6 +75,7 @@ public class PlayerInteract : MonoBehaviour
                 // Zet variables terug zodat interacts niks meer doen
                 interactableName = "";
                 interactable = null;
+                ui.InteractHelper(IngameUI.InteractHelperState.SetToDefault);
             }
         }
     }
@@ -78,6 +91,17 @@ public class PlayerInteract : MonoBehaviour
 
             interactable.Interact(boxHolder);
             holdingBox = !holdingBox;
+
+            if (firstPickup)
+            {
+                ui.InteractHelper(IngameUI.InteractHelperState.BoxDrop);
+                firstPickup = false;
+            }
+            else if (firstDrop)
+            {
+                ui.InteractHelper(IngameUI.InteractHelperState.SetToDefault);
+                firstDrop = false;
+            }
         }
     }
 
@@ -90,6 +114,12 @@ public class PlayerInteract : MonoBehaviour
                 return;
 
             interactable.Interact();
+
+            if (firstOpen)
+            {
+                ui.InteractHelper(IngameUI.InteractHelperState.SetToDefault);
+                firstOpen = false;
+            }
         }
     }
 
