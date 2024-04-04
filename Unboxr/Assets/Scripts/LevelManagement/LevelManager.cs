@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
 
 public static class LevelManager
 {
@@ -8,7 +6,8 @@ public static class LevelManager
     public static BoxSpawning CurrentSpawner;
     public static float timer = .0f;
 
-    private static int currentLevel = 0;
+    private static int currentLevel = -1;
+    private static float timerCP = .0f;
 
     public static void AddLevel(Level lvl)
     {
@@ -18,12 +17,15 @@ public static class LevelManager
 
     public static void NextLevel()
     {
+        // Update variables
         currentLevel++;
+        timerCP = timer;
     }
 
     public static void RestartLevel()
     {
-        timer = .0f;
+        // Restart level
+        timer = timerCP;
         Levels[currentLevel].RestartLevel();
     }
 }
