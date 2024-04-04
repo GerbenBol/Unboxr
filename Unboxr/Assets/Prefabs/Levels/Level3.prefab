@@ -370,7 +370,7 @@ Transform:
   m_GameObject: {fileID: 838181044693168062}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.69, y: -2.51, z: 3.83}
+  m_LocalPosition: {x: 2.69, y: -2.51, z: -0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39689816829c6774192863a39c92d638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxesLeft: 10
+  boxesLeft: 6
   boxPrefab: {fileID: 5812780560070480007, guid: 8bb7d81bd0926ef4897fbeac682d01c3, type: 3}
 --- !u!1 &1437359968184390899
 GameObject:
@@ -2320,6 +2320,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3278841346379649567}
+  - {fileID: 4240797362424161597}
+  - {fileID: 2922937926192550076}
+  - {fileID: 2089727192937740000}
+  - {fileID: 6334062453621989973}
   - {fileID: 4769735030248364333}
   - {fileID: 1511901384384614986}
   - {fileID: 5789037079823291549}
@@ -2328,10 +2332,6 @@ Transform:
   - {fileID: 4180985935511313739}
   - {fileID: 1263662557288563425}
   - {fileID: 4461329499881241693}
-  - {fileID: 4240797362424161597}
-  - {fileID: 2922937926192550076}
-  - {fileID: 2089727192937740000}
-  - {fileID: 6334062453621989973}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6736470023122453831

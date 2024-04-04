@@ -19,7 +19,7 @@ public class BoxSpawning : MonoBehaviour
     {
         if (boxesLeft > 0)
         {
-            GameObject gO = Instantiate(boxPrefab);
+            GameObject gO = Instantiate(boxPrefab, transform);
             gO.GetComponent<MeshRenderer>().material = mat;
             boxesLeft--;
             ui.ChangeBoxesText(boxesLeft);

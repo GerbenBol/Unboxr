@@ -2162,7 +2162,7 @@ Transform:
   m_GameObject: {fileID: 8397933542436888345}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.69, y: -2.51, z: 3.83}
+  m_LocalPosition: {x: 0.53, y: -3.43, z: 3.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2180,7 +2180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39689816829c6774192863a39c92d638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxesLeft: 10
+  boxesLeft: 3
   boxPrefab: {fileID: 5812780560070480007, guid: 8bb7d81bd0926ef4897fbeac682d01c3, type: 3}
 --- !u!1 &9163284606452084646
 GameObject:
@@ -2449,6 +2449,18 @@ PrefabInstance:
     - target: {fileID: 5932088857981603636, guid: 079f22145eab3134c8a973e3d58384d2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007473230298161226, guid: 079f22145eab3134c8a973e3d58384d2, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.2599907
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007473230298161226, guid: 079f22145eab3134c8a973e3d58384d2, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.7199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007473230298161226, guid: 079f22145eab3134c8a973e3d58384d2, type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.002678537
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
