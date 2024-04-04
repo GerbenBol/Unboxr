@@ -137,7 +137,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563064989596060332}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 76da2a1221fd2584c8bb757a482e2de4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -214,6 +214,8 @@ MonoBehaviour:
   objectMask:
     serializedVersion: 2
     m_Bits: 64
+  pause: {fileID: 0}
+  cam: {fileID: 6037699769410478123}
 --- !u!114 &4442100440631092135
 MonoBehaviour:
   m_ObjectHideFlags: 0

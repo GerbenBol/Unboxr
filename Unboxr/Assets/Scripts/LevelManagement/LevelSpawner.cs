@@ -6,6 +6,8 @@ public class LevelSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> levels;
 
+    public static int LastSpawned = 0;
+
     private void Start()
     {
         // Spawn eerste level
@@ -15,14 +17,18 @@ public class LevelSpawner : MonoBehaviour
 
     public void CompleteLevel(int index)
     {
+        int nextLevel = index + 1;
+
         // Level completed handling
-        if (index + 1 > levels.Count)
-            SpawnLevel(index + 1);
+        if (nextLevel < levels.Count)
+            SpawnLevel(nextLevel);
     }
 
     private void SpawnLevel(int index)
     {
         // Spawn level
         Instantiate(levels[index]);
+        LastSpawned = index;
+        LevelManager.NextLevel();
     }
 }

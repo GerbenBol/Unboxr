@@ -11,6 +11,7 @@ public class PauseScreen : MonoBehaviour
 
     public void PauseGame(bool state)
     {
+        // Pauseer de game
         screen.SetActive(state);
         GamePaused = state;
         Cursor.visible = state;
@@ -23,16 +24,20 @@ public class PauseScreen : MonoBehaviour
 
     public void Continue()
     {
+        // Ga weer door met het spel
         PauseGame(false);
     }
 
     public void Retry()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // Restart het level
+        Continue();
+        LevelManager.RestartLevel();
     }
 
     public void ReturnToMain()
     {
+        // Ga terug naar de main menu
         SceneManager.LoadScene(0);
     }
 }

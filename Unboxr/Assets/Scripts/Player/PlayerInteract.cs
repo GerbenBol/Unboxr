@@ -11,10 +11,15 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private GameObject boxHolder;
     [SerializeField] private LayerMask objectMask;
     [SerializeField] private PauseScreen pause;
+    [SerializeField] private Transform cam;
+    [SerializeField] private IngameUI ui;
 
     private IInteractable interactable;
     private PlayerInputs input;
     private string interactableName = "";
+    private bool firstPickup = true;
+    private bool firstDrop = true;
+    private bool firstOpen = true;
 
     private void Awake()
     {
@@ -40,19 +45,29 @@ public class PlayerInteract : MonoBehaviour
     {
         if (!PauseScreen.GamePaused)
         {
-            // Check of we naar een object kijken
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, .5f, objectMask, QueryTriggerInteraction.Collide))
+            // Check of we naar een object kijken of al een doos vast hebben
+            if (holdingBox)
+                return;
+            else if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit, 3f, objectMask, QueryTriggerInteraction.Collide))
             {
                 // Check welk object we hebben geraakt
                 if (hit.collider.CompareTag("Box"))
                 {
                     interactableName = "Box";
                     interactable = hit.collider.GetComponent<Box>();
+
+                    // Show on screen to help with the first time
+                    if (firstPickup)
+                        ui.InteractHelper(IngameUI.InteractHelperState.BoxPickup);
                 }
                 else if (hit.collider.CompareTag("Door"))
                 {
                     interactableName = "Door";
                     interactable = hit.collider.GetComponent<Door>();
+
+                    // Show on screen to help with the first time
+                    if (firstOpen)
+                        ui.InteractHelper(IngameUI.InteractHelperState.DoorOpen);
                 }
             }
             else
@@ -60,6 +75,7 @@ public class PlayerInteract : MonoBehaviour
                 // Zet variables terug zodat interacts niks meer doen
                 interactableName = "";
                 interactable = null;
+                ui.InteractHelper(IngameUI.InteractHelperState.SetToDefault);
             }
         }
     }
@@ -74,11 +90,18 @@ public class PlayerInteract : MonoBehaviour
                     return;
 
             interactable.Interact(boxHolder);
+            holdingBox = !holdingBox;
 
-            if (!holdingBox)
-                holdingBox = true;
-            else
-                holdingBox = false;
+            if (firstPickup)
+            {
+                ui.InteractHelper(IngameUI.InteractHelperState.BoxDrop);
+                firstPickup = false;
+            }
+            else if (firstDrop)
+            {
+                ui.InteractHelper(IngameUI.InteractHelperState.SetToDefault);
+                firstDrop = false;
+            }
         }
     }
 
@@ -91,6 +114,12 @@ public class PlayerInteract : MonoBehaviour
                 return;
 
             interactable.Interact();
+
+            if (firstOpen)
+            {
+                ui.InteractHelper(IngameUI.InteractHelperState.SetToDefault);
+                firstOpen = false;
+            }
         }
     }
 

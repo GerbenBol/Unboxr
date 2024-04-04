@@ -72,9 +72,9 @@ public class PlayerMovement : MonoBehaviour
         {
             // Verander camera aan de hand van muis movements
             Vector2 delta = input.Player.Look.ReadValue<Vector2>();
-            float dTime = Time.deltaTime * 25; 
-       
-            cam.Rotate(Mathf.Clamp(delta.y * -dTime, -85, 85), 0, 0);
+            float dTime = Time.deltaTime * 20;
+
+            cam.Rotate(delta.y * -dTime, 0, 0);
             transform.Rotate(0, delta.x * dTime, 0);
         }
     }

@@ -1,40 +1,31 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
 
 public static class LevelManager
 {
-    public static bool LevelCompleted = false;
+    public static List<Level> Levels = new();
     public static BoxSpawning CurrentSpawner;
     public static float timer = .0f;
 
-    private static readonly Dictionary<GameObject, bool> buttons = new();
-    private static Door door;
+    private static int currentLevel = -1;
+    private static float timerCP = .0f;
 
-    public static void AddButton(GameObject gO)
+    public static void AddLevel(Level lvl)
     {
-        // Voeg buttons toe aan dictionary
-        buttons.Add(gO, false);
+        // Voeg level toe
+        Levels.Add(lvl);
     }
 
-    public static void AddDoor(GameObject gO)
+    public static void NextLevel()
     {
-        // Voeg deur van level toe
-        door = gO.GetComponent<Door>();
+        // Update variables
+        currentLevel++;
+        timerCP = timer;
     }
 
-    public static void CompleteButton(GameObject gO)
+    public static void RestartLevel()
     {
-        // Zet bijbehorende waarde naar true
-        buttons[gO] = true;
-
-        // Check alle buttons
-        foreach (KeyValuePair<GameObject, bool> kvp in buttons)
-            if (!kvp.Value)
-                return;
-
-        // Doe licht aan en maak level compleet
-        door.TurnOnLight();
-        LevelCompleted = true;
+        // Restart level
+        timer = timerCP;
+        Levels[currentLevel].RestartLevel();
     }
 }

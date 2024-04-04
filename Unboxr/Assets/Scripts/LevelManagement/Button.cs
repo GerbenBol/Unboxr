@@ -4,38 +4,50 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    [SerializeField] new private MeshRenderer renderer;
-    
+    [SerializeField] private int level;
+    [SerializeField] private GameObject[] lights;
+
     private Material wantedMaterial;
     private string wantedName;
     private bool completed = false;
 
     private void Start()
     {
-        wantedMaterial = renderer.material;
+        wantedMaterial = GetComponent<MeshRenderer>().material;
         wantedName = wantedMaterial.ToString().Split(' ')[0];
-        LevelManager.AddButton(gameObject);
+        LevelManager.Levels[level].AddButton(gameObject);
+
+        foreach (GameObject light in lights)
+            light.GetComponent<Light>().color = wantedMaterial.color;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Box") && !completed)
+        if (collision.gameObject.CompareTag("Box") && !completed)
         {
             // Check of het de juiste doos is
-            if (other.GetComponent<MeshRenderer>().material.ToString().Split(' ')[0] == wantedName)
+            if (collision.gameObject.GetComponent<MeshRenderer>().material.ToString().Split(' ')[0] == wantedName)
             {
                 // Disable doos & button, geef info door aan level manager
                 completed = true;
-                other.GetComponent<Box>().Locked = true;
-                LevelManager.CompleteButton(gameObject);
+                collision.gameObject.GetComponent<Box>().Locked = true;
+                LevelManager.Levels[level].CompleteButton(gameObject);
             }
             else
             {
                 // Destroy doos
                 PlayerInteract.holdingBox = false;
-                other.GetComponent<Box>().Respawn();
-                Destroy(other.gameObject);
+                collision.gameObject.GetComponent<Box>().Respawn();
+                Destroy(collision.gameObject);
             }
         }
+    }
+
+    public void LightSwitch(bool onOff, string mat)
+    {
+        // Check if we have to switch lights on/off
+        if (mat == wantedName)
+            foreach (GameObject light in lights)
+                light.SetActive(onOff);
     }
 }
