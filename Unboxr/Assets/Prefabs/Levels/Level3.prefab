@@ -2091,6 +2091,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4461329499881241693}
   - component: {fileID: 3722372813648509134}
+  - component: {fileID: 4958004966039392696}
   m_Layer: 0
   m_Name: LevelTrigger
   m_TagString: Untagged
@@ -2107,7 +2108,7 @@ Transform:
   m_GameObject: {fileID: 3333763016423992154}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.64, y: -2.93, z: -0.886}
+  m_LocalPosition: {x: 13.52, y: -2.93, z: -0.886}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2132,8 +2133,20 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1254473, y: 1, z: 2.5160396}
-  m_Center: {x: 2.4341083, y: 0, z: 0.013884187}
+  m_Size: {x: 3.7457352, y: 2.7804008, z: 4.54387}
+  m_Center: {x: 2.5905304, y: 0.43420768, z: 0.005198002}
+--- !u!114 &4958004966039392696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3333763016423992154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f95d8107b1451048b75b679a2260de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3858350300204426801
 GameObject:
   m_ObjectHideFlags: 0
@@ -3983,8 +3996,8 @@ Transform:
   m_GameObject: {fileID: 7955796274139334252}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.25, y: 3.3611, z: 12.17}
-  m_LocalScale: {x: 0.26793668, y: 1, z: 0.30121404}
+  m_LocalPosition: {x: 8.25, y: 3.3611, z: 11.782}
+  m_LocalScale: {x: 0.26793668, y: 1, z: 0.2236213}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6003887971602348627}

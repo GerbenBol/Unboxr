@@ -1,12 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> levels;
+    [SerializeField] private GameObject endVoid;
 
     public static int LastSpawned = 0;
+
+    private readonly List<GameObject> spawned = new();
 
     private void Start()
     {
@@ -22,13 +24,22 @@ public class LevelSpawner : MonoBehaviour
         // Level completed handling
         if (nextLevel < levels.Count)
             SpawnLevel(nextLevel);
+        else
+            Instantiate(endVoid);
+    }
+
+    public void StartEnd()
+    {
+        foreach (GameObject obj in spawned)
+            Destroy(obj);
     }
 
     private void SpawnLevel(int index)
     {
         // Spawn level
-        Instantiate(levels[index]);
+        GameObject obj = Instantiate(levels[index]);
         LastSpawned = index;
         LevelManager.NextLevel();
+        spawned.Add(obj);
     }
 }
