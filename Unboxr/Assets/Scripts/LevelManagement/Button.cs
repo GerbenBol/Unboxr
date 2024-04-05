@@ -6,6 +6,8 @@ public class Button : MonoBehaviour
 {
     [SerializeField] private int level;
     [SerializeField] private GameObject[] lights;
+    [SerializeField] private AudioSource correct;
+    [SerializeField] private AudioSource wrong;
 
     private Material wantedMaterial;
     private string wantedName;
@@ -32,6 +34,7 @@ public class Button : MonoBehaviour
                 completed = true;
                 collision.gameObject.GetComponent<Box>().Locked = true;
                 LevelManager.Levels[level].CompleteButton(gameObject);
+                correct.Play();
             }
             else
             {
@@ -39,6 +42,7 @@ public class Button : MonoBehaviour
                 PlayerInteract.holdingBox = false;
                 collision.gameObject.GetComponent<Box>().Respawn();
                 Destroy(collision.gameObject);
+                wrong.Play();
             }
         }
     }
