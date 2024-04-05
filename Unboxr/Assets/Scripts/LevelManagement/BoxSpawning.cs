@@ -24,5 +24,7 @@ public class BoxSpawning : MonoBehaviour
             boxesLeft--;
             ui.ChangeBoxesText(boxesLeft);
         }
+        else
+            GameObject.Find("UI").GetComponent<PauseScreen>().GameOver();
     }
 }

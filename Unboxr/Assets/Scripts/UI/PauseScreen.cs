@@ -8,18 +8,20 @@ public class PauseScreen : MonoBehaviour
     public static bool GamePaused = false;
 
     [SerializeField] private GameObject screen;
+    [SerializeField] private GameObject gameOver;
 
     public void PauseGame(bool state)
     {
         // Pauseer de game
         screen.SetActive(state);
-        GamePaused = state;
-        Cursor.visible = state;
+        StopGame(state);
+    }
 
-        if (state)
-            Cursor.lockState = CursorLockMode.Confined;
-        else
-            Cursor.lockState = CursorLockMode.Locked;
+    public void GameOver()
+    {
+        // Game over handler
+        gameOver.SetActive(true);
+        StopGame(true);
     }
 
     public void Continue()
@@ -39,5 +41,16 @@ public class PauseScreen : MonoBehaviour
     {
         // Ga terug naar de main menu
         SceneManager.LoadScene(0);
+    }
+
+    private void StopGame(bool state)
+    {
+        GamePaused = state;
+        Cursor.visible = state;
+
+        if (state)
+            Cursor.lockState = CursorLockMode.Confined;
+        else
+            Cursor.lockState = CursorLockMode.Locked;
     }
 }
