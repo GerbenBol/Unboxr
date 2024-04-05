@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EndVoid : MonoBehaviour
@@ -16,6 +14,6 @@ public class EndVoid : MonoBehaviour
 
         // Spawn box & make player grow
         box.SetActive(true);
-        PlayerGrow.Grow();
+        BoxShrink.Shrink();
     }
 }

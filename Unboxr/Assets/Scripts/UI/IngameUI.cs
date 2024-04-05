@@ -13,14 +13,18 @@ public class IngameUI : MonoBehaviour
     [SerializeField] private GameObject lockedPanel;
     
     private readonly string boxesStart = "Boxes left: ";
+    private bool gameEnded = false;
 
     private void Update()
     {
         if (PauseScreen.GamePaused)
             return;
 
-        LevelManager.timer += Time.deltaTime;
-        timerTMP.text = FormatTime(LevelManager.timer);
+        if (!gameEnded)
+        {
+            LevelManager.timer += Time.deltaTime;
+            timerTMP.text = FormatTime(LevelManager.timer);
+        }
     }
 
     public void ChangeBoxesText(int boxesLeft)
@@ -43,8 +47,15 @@ public class IngameUI : MonoBehaviour
             InteractHelperState.BoxPickup => "Press E to pick up box",
             InteractHelperState.BoxDrop => "Press E to drop the box",
             InteractHelperState.DoorOpen => "Press F to open the door",
-            _ => "",
+            _ => ""
         };
+    }
+
+    public void RemoveText()
+    {
+        timerTMP.text = "";
+        boxesLeftTMP.text = "";
+        gameEnded = true;
     }
 
     private string FormatTime(float time)

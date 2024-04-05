@@ -5,6 +5,7 @@ public class LevelSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> levels;
     [SerializeField] private GameObject endVoid;
+    [SerializeField] private IngameUI ui;
 
     public static int LastSpawned = 0;
 
@@ -32,6 +33,8 @@ public class LevelSpawner : MonoBehaviour
     {
         foreach (GameObject obj in spawned)
             Destroy(obj);
+
+        ui.RemoveText();
     }
 
     private void SpawnLevel(int index)
