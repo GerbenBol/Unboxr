@@ -31,6 +31,6 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
     {
         // Doe licht aan voor extra clarity
         light.GetComponent<MeshRenderer>().material = material;
-        light.transform.GetChild(0).gameObject.SetActive(true);
+        light.transform.GetChild(0).GetComponent<Light>().color = material.color;
     }
 }
